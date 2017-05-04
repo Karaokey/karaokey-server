@@ -192,26 +192,26 @@ app.post('/file', function (req, res) {
                 console.log("/file - Google upload successful");
                 console.log("/file - Sending object for recog: " + JSON.stringify(obj));
 
-                // speechClient.recognize(destination, {
-                //     encoding: 'FLAC',
-                //     sampleRate: 48000,
-                //     languageCode: "en-US"
-                // }, function(err, transcript, response) {
-                //     if (err) {
-                //         console.log("/file - ERROR - Google speech failed:", err);;
-                //         response.send({});
-                //     }
+                speechClient.recognize(destination, {
+                    encoding: 'FLAC',
+                    sampleRate: 48000,
+                    languageCode: "en-US"
+                }, function(err, transcript, response) {
+                    if (err) {
+                        console.log("/file - ERROR - Google speech failed:", err);;
+                        response.send({});
+                    }
 
-                //     console.log("/file - Google speech successful: Response----------------------------");
-                //     console.log("/file - ", JSON.stringify(response));
-                //     console.log("/file - End response -------------------------------------------------");
-                //     // waitCount = 0;
-                //     if (transcript.length > 0)
-                //         users[uuid].playerLyrics += "</br>";    
-                //     users[uuid].playerLyrics += transcript;
-                //     res.write(JSON.stringify(response));
-                //     res.end();
-                // });
+                    console.log("/file - Google speech successful: Response----------------------------");
+                    console.log("/file - ", JSON.stringify(response));
+                    console.log("/file - End response -------------------------------------------------");
+                    // waitCount = 0;
+                    if (transcript.length > 0)
+                        users[uuid].playerLyrics += "</br>";    
+                    users[uuid].playerLyrics += transcript;
+                    res.write(JSON.stringify(response));
+                    res.end();
+                });
             });
         });
     });
